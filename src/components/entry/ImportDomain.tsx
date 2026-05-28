@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { SeedPool, Concept, Relation } from '../../types/concept.ts';
+import type { SeedPool } from '../../types/concept.ts';
 
 interface ImportDomainProps {
   onImport: (domainName: string, data: SeedPool) => void;
@@ -60,7 +60,7 @@ function findUnconnected(concepts: any[], relations: any[]): string[] {
   return concepts.filter((c) => !connected.has(c.id)).map((c) => c.label);
 }
 
-function validateDomainData(data: unknown, domainName: string): { valid: boolean; error?: string } {
+function validateDomainData(data: unknown): { valid: boolean; error?: string } {
   if (!data || typeof data !== 'object') return { valid: false, error: 'Not a valid JSON object' };
 
   const d = data as Record<string, unknown>;
@@ -146,7 +146,7 @@ export function ImportDomain({ onImport, onClose }: ImportDomainProps) {
     try {
       const cleaned = extractJson(jsonInput);
       const parsed = JSON.parse(cleaned);
-      const validation = validateDomainData(parsed, domainName);
+      const validation = validateDomainData(parsed);
       if (!validation.valid) {
         setError(validation.error!);
         return;
