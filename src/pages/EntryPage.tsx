@@ -32,14 +32,6 @@ export function EntryPage() {
     setTimeout(() => {
       const q = query.toLowerCase();
 
-      // DEBUG: Check what's in importedDomains
-      const importedKeys = Object.keys(knowledge.importedDomains);
-      console.log('[EntryPage] Searching:', q);
-      console.log('[EntryPage] Imported domain keys:', importedKeys);
-      console.log('[EntryPage] Imported domain data:', knowledge.importedDomains);
-      console.log('[EntryPage] Pool concept count:', pool.concepts.length);
-      console.log('[EntryPage] Pool domains:', [...new Set(pool.concepts.map(c => c.domain))]);
-
       // 1. Search via engine (pool already includes imported domains from context)
       const entry = generateFromEntry(query, entryType, pool);
       const conceptMap = new Map(pool.concepts.map((c) => [c.id, c]));
@@ -55,14 +47,10 @@ export function EntryPage() {
         }
       }
 
-      console.log('[EntryPage] Engine matched:', matched.length, 'concepts');
-
       // 2. Search imported domains directly (in case pool is stale or concepts weren't matched)
       for (const [domainName, domainData] of Object.entries(knowledge.importedDomains)) {
-        console.log(`[EntryPage] Checking domain "${domainName}" (${domainData.concepts.length} concepts)`);
         // If query matches the domain name, show ALL concepts from that domain
         if (domainName.toLowerCase().includes(q)) {
-          console.log(`[EntryPage] Domain "${domainName}" MATCHES query "${q}", adding ALL concepts`);
           for (const c of domainData.concepts) {
             if (!seenIds.has(c.id)) {
               seenIds.add(c.id);
@@ -74,15 +62,11 @@ export function EntryPage() {
         // Otherwise match individual concepts by label/description
         for (const c of domainData.concepts) {
           if (!seenIds.has(c.id) && (c.label.toLowerCase().includes(q) || c.description.toLowerCase().includes(q))) {
-            console.log(`[EntryPage] Concept "${c.label}" in domain "${domainName}" matches query "${q}"`);
             seenIds.add(c.id);
             matched.push({ id: c.id, label: c.label, desc: c.description, domain: c.domain });
           }
         }
       }
-
-      console.log('[EntryPage] Total matched:', matched.length, 'concepts');
-      console.log('[EntryPage] Results labels:', matched.map(m => m.label));
 
       setResults(matched);
       setLoading(false);
