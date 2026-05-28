@@ -2,7 +2,9 @@
 
 Navigate the space of ideas.
 
-**Concept Voice** is an interactive concept navigation system. Instead of "learning" knowledge, you explore relationships between concepts across domains — tracing paths, discovering structures, and building your own mental map.
+**Concept Voice** is an interactive concept navigation system. It does not depend on AI. AI only expands the landscape — import knowledge into a living conceptual world.
+
+Instead of "learning" knowledge, you explore relationships between concepts across domains — tracing paths, discovering structures, and building your own mental map.
 
 ## Live Demo
 
@@ -24,10 +26,10 @@ Each concept sits at the center of a ring of related concepts. Click a neighbor 
 When you activate concepts across different domains, the system detects emerging structures — patterns that bridge fields. These are surfaced as synthetic knowledge structures.
 
 ### 4. Import Domain — Bring Your Own Field
-Missing a domain? Use the Import Domain feature:
+Missing a domain? Use the Import Domain feature (AI-assisted, optional):
 1. Enter a domain name (e.g. "Quantum Computing")
 2. Copy the generated prompt
-3. Send it to any AI
+3. Send it to any AI (or write the JSON yourself)
 4. Paste the returned JSON — the system validates and imports it, automatically creating cross-domain bridge relations.
 
 ### 5. Knowledge & Output
@@ -42,7 +44,7 @@ Missing a domain? Use the Import Domain feature:
 - **React Router v7** — routing
 - **React Context** — state management
 - **localStorage** — data persistence
-- **Rule Engine** — all concept recommendations, relations, and structure detection are powered by deterministic rules, not AI (except optional domain import)
+- **No AI dependency** — all concept recommendations, relations, and structure detection are powered by deterministic rules. AI is only used for the optional domain import feature.
 
 ## Project Structure
 
@@ -88,6 +90,8 @@ npm run preview   # preview the production build
 
 ## Philosophy
 
-This project is built on a simple idea: **understanding is navigation.** Instead of consuming information linearly, you move through a network of ideas — zooming in and out, making connections, and letting structures emerge from your own exploration patterns.
+Concept Voice does not depend on AI. AI only expands the landscape. Import knowledge into a living conceptual world.
+
+The core idea: **understanding is navigation.** Instead of consuming information linearly, you move through a network of ideas — zooming in and out, making connections, and letting structures emerge from your own exploration patterns.
 
 The system never tells you what to learn. It shows you what's connected and lets you choose your path.
