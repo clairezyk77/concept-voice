@@ -1,73 +1,93 @@
-# React + TypeScript + Vite
+# Concept Voice
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Navigate the space of ideas.
 
-Currently, two official plugins are available:
+**Concept Voice** is an interactive concept navigation system. Instead of "learning" knowledge, you explore relationships between concepts across domains — tracing paths, discovering structures, and building your own mental map.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Live Demo
 
-## React Compiler
+[https://concept-voice.vercel.app/](https://concept-voice.vercel.app/)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## How It Works
 
-## Expanding the ESLint configuration
+### 1. Entry — Start Exploring
+Enter a question, topic, or discipline. The system matches concepts from its knowledge pool using keyword relevance scoring and domain detection.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 2. Concept Space — Navigate Relations
+Each concept sits at the center of a ring of related concepts. Click a neighbor to navigate there, or use the action buttons to:
+- **Activate** — save a concept to your exploration trail
+- **Expand** — surface deeper, more distant connections
+- **Refresh** — shuffle the ring for new perspectives
+- **Pin** — keep a concept visible
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 3. Structures — Emergent Patterns
+When you activate concepts across different domains, the system detects emerging structures — patterns that bridge fields. These are surfaced as synthetic knowledge structures.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 4. Import Domain — Bring Your Own Field
+Missing a domain? Use the Import Domain feature:
+1. Enter a domain name (e.g. "Quantum Computing")
+2. Copy the generated prompt
+3. Send it to any AI
+4. Paste the returned JSON — the system validates and imports it, automatically creating cross-domain bridge relations.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 5. Knowledge & Output
+- **Knowledge Page** — view your activation history, connections, and exploration paths
+- **Output Page** — export your synthesized knowledge structures
+
+## Tech Stack
+
+- **React 19** + **TypeScript**
+- **Vite 8** — build tool
+- **Tailwind CSS v4** — styling
+- **React Router v7** — routing
+- **React Context** — state management
+- **localStorage** — data persistence
+- **Rule Engine** — all concept recommendations, relations, and structure detection are powered by deterministic rules, not AI (except optional domain import)
+
+## Project Structure
+
+```
+src/
+├── engine/            # Core logic (pure functions)
+│   ├── conceptGrammar.ts     # 6 relation types
+│   ├── densityEngine.ts      # Density-controlled recommendations
+│   ├── recommendation.ts     # Neighbor recommendation engine
+│   ├── structureDetection.ts # Cross-domain structure detection
+│   └── entryGenerator.ts     # Entry point search
+├── store/             # React Context state
+├── components/
+│   ├── space/         # Concept graph, ring, node, actions
+│   ├── entry/         # Import domain modal
+│   ├── knowledge/     # Activation map, connection graph
+│   ├── structures/    # Structure cards
+│   ├── output/        # Export panel
+│   └── ui/            # Shared UI components
+├── pages/             # Route pages
+├── hooks/             # Custom React hooks
+├── types/             # TypeScript type definitions
+└── layout/            # Main layout + sidebar
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Local Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone <repo-url>
+cd concept-voice
+npm install
+npm run dev
 ```
+
+Opens at `http://localhost:5173` (or the next available port).
+
+### Build
+
+```bash
+npm run build
+npm run preview   # preview the production build
+```
+
+## Philosophy
+
+This project is built on a simple idea: **understanding is navigation.** Instead of consuming information linearly, you move through a network of ideas — zooming in and out, making connections, and letting structures emerge from your own exploration patterns.
+
+The system never tells you what to learn. It shows you what's connected and lets you choose your path.
